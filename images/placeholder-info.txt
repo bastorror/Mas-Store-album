@@ -1,0 +1,15 @@
+# Sample Placeholder Image
+# This is just a text file to show the structure
+# Replace this with actual PNG files for your snacks
+
+# Example file structure:
+# images/
+#   ├── chips-1.png
+#   ├── chips-2.png
+#   ├── sweets-1.png
+#   └── ... (other PNG files)
+
+# The website will automatically:
+# 1. Try to load the PNG image first
+# 2. If the image fails to load, show the emoji fallback
+# 3. Apply proper styling to both images and emojis
