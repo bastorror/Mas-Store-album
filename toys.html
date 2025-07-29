@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร้านมาศการค้า</title>
+    <title>🧸 ของเล่น - ร้านมาศการค้า</title>
     <style>
         * {
             margin: 0;
@@ -43,24 +43,14 @@
             opacity: 0.9;
         }
 
-        .category-nav {
+        .back-nav {
             background: white;
-            padding: 20px 0;
+            padding: 15px 0;
             margin-bottom: 30px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-btn {
+        .back-btn {
             background: #667eea;
             color: white;
             border: none;
@@ -70,27 +60,23 @@
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .nav-btn:hover, .nav-btn.active {
+        .back-btn:hover {
             background: #764ba2;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
         }
 
-        .category-section {
-            margin-bottom: 50px;
-        }
-
         .category-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: center;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .category-title:after {
@@ -99,10 +85,31 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 2px;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
         }
 
         .snack-grid {
@@ -186,31 +193,6 @@
             line-height: 1.4;
         }
 
-        .price-tag {
-            display: none;
-        }
-
-        .search-container {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .search-box {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .search-box:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
-        }
-
         .hidden {
             display: none;
         }
@@ -221,61 +203,6 @@
             text-align: center;
             padding: 30px 0;
             margin-top: 50px;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .snack-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 20px;
-            }
-
-            .nav-buttons {
-                gap: 8px;
-            }
-
-            .nav-btn {
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-
-            .category-title {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .snack-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .nav-btn {
-                padding: 8px 12px;
-                font-size: 11px;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Animation for category switching */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Modal Styles */
@@ -385,8 +312,25 @@
             }
         }
 
-        /* Mobile modal adjustments */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .snack-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
             .modal-content {
                 margin: 10% auto;
                 width: 95%;
@@ -408,35 +352,51 @@
                 padding: 20px;
             }
         }
+
+        @media (max-width: 480px) {
+            .snack-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>ร้านมาศการค้า</h1>
-            <p class="subtitle">คอลเลกชันขนม</p>
+            <h1>🧸 ของเล่น</h1>
+            <p class="subtitle">ร้านมาศการค้า</p>
         </div>
     </header>
 
-    <nav class="category-nav">
+    <nav class="back-nav">
         <div class="container">
-            <div class="nav-buttons" id="category-buttons">
-                <!-- Navigation buttons will be generated automatically from JSON -->
-            </div>
+            <a href="index.html" class="back-btn">← กลับหน้าหลัก</a>
         </div>
     </nav>
 
     <div class="container">
+        <h2 class="category-title">🧸 ของเล่น</h2>
+        
         <div class="search-container">
-            <input type="text" class="search-box" placeholder="🔍 ค้นหาขนมที่คุณชื่นชอบ..." onkeyup="searchSnacks()">
+            <input type="text" class="search-box" placeholder="🔍 ค้นหาของเล่นที่คุณชื่นชอบ..." onkeyup="searchToys()">
         </div>
 
-        <!-- Dynamic content will be loaded here -->
-        <div id="snack-categories"></div>
+        <div class="snack-grid" id="toys-grid">
+            <!-- Toy items will be loaded here -->
+        </div>
     </div>
 
-    <!-- Modal for displaying snack details -->
-    <div id="snackModal" class="modal">
+    <!-- Modal for displaying toy details -->
+    <div id="toyModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-image" id="modalImage">
@@ -451,67 +411,44 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 ร้านมาส สงวนลิขสิทธิ์ | ขนมคุณภาพพรีเมียมสำหรับทุกคน</p>
+            <p>&copy; 2025 ร้านมาส สงวนลิขสิทธิ์ | ของเล่นคุณภาพพรีเมียมสำหรับทุกคน</p>
         </div>
     </footer>
 
     <script>
-        let snacksData = {};
-        let currentCategory = 'all';
+        let toysData = {};
+        const categoryId = 'toys';
 
-        // Load snacks data from JSON file
-        async function loadSnacksData() {
+        // Load toys data from JSON file
+        async function loadToysData() {
             try {
                 const response = await fetch('snacks-data.json');
-                snacksData = await response.json();
-                generateNavigationButtons();
-                renderCategories();
+                const data = await response.json();
+                toysData = data.categories[categoryId];
+                renderToys();
                 setupEventListeners();
             } catch (error) {
-                console.error('Error loading snacks data:', error);
+                console.error('Error loading toys data:', error);
                 // Fallback: show error message
-                document.getElementById('snack-categories').innerHTML = 
-                    '<p style="text-align: center; color: #666; margin: 50px 0;">ไม่สามารถโหลดข้อมูลขนมได้ กรุณาลองใหม่อีกครั้ง</p>';
+                document.getElementById('toys-grid').innerHTML = 
+                    '<p style="text-align: center; color: #666; margin: 50px 0;">ไม่สามารถโหลดข้อมูลของเล่นได้ กรุณาลองใหม่อีกครั้ง</p>';
             }
         }
 
-        // Generate navigation buttons from JSON data
-        function generateNavigationButtons() {
-            const buttonContainer = document.getElementById('category-buttons');
-            let buttonsHTML = '';
-
-            // Add "All" button first (stays on main page)
-            buttonsHTML += '<button class="nav-btn active" onclick="showCategory(\'all\')">ขนมทั้งหมด</button>';
-
-            // Add buttons for each category that link to individual pages
-            for (const [categoryId, category] of Object.entries(snacksData.categories)) {
-                buttonsHTML += `<button class="nav-btn" onclick="window.location.href='${categoryId}.html'">${category.emoji} ${category.name}</button>`;
-            }
-
-            buttonContainer.innerHTML = buttonsHTML;
-        }
-
-        // Render all categories and their items
-        function renderCategories() {
-            const container = document.getElementById('snack-categories');
+        // Render toys
+        function renderToys() {
+            const container = document.getElementById('toys-grid');
             let html = '';
 
-            for (const [categoryId, category] of Object.entries(snacksData.categories)) {
-                html += `
-                    <section class="category-section" id="${categoryId}-section">
-                        <h2 class="category-title">${category.emoji} ${category.name}</h2>
-                        <div class="snack-grid">
-                            ${category.items.map(item => createSnackCard(item, categoryId)).join('')}
-                        </div>
-                    </section>
-                `;
-            }
+            toysData.items.forEach(item => {
+                html += createToyCard(item);
+            });
 
             container.innerHTML = html;
         }
 
-        // Create HTML for a single snack card
-        function createSnackCard(item, categoryId) {
+        // Create HTML for a single toy card
+        function createToyCard(item) {
             const hasImage = item.image && item.image.trim() !== '';
             const imageContent = hasImage 
                 ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
@@ -519,7 +456,7 @@
             const fallbackEmoji = `<span class="emoji-fallback" style="display: ${hasImage ? 'none' : 'flex'}">${item.emoji}</span>`;
             
             return `
-                <div class="snack-card" data-category="${categoryId}" data-name="${item.name.toLowerCase()}" data-id="${item.id}">
+                <div class="snack-card" data-name="${item.name.toLowerCase()}" data-id="${item.id}">
                     <div class="snack-image">
                         ${imageContent}
                         ${fallbackEmoji}
@@ -527,7 +464,6 @@
                     <div class="snack-info">
                         <h3 class="snack-name">${item.name}</h3>
                         <p class="snack-description">${item.description}</p>
-                        <span class="price-tag">${item.price}</span>
                     </div>
                 </div>
             `;
@@ -535,24 +471,11 @@
 
         // Setup event listeners after content is loaded
         function setupEventListeners() {
-            // Add click event to snack cards for interaction
+            // Add click event to toy cards for modal
             document.querySelectorAll('.snack-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const itemId = this.getAttribute('data-id');
-                    const categoryId = this.getAttribute('data-category');
-                    showSnackModal(itemId, categoryId);
-                });
-            });
-
-            // Add smooth scrolling for navigation buttons
-            document.querySelectorAll('.nav-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    setTimeout(() => {
-                        const firstVisibleSection = document.querySelector('.category-section:not([style*="display: none"])');
-                        if (firstVisibleSection) {
-                            firstVisibleSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    }, 100);
+                    showToyModal(itemId);
                 });
             });
 
@@ -560,12 +483,12 @@
             setupModalEventListeners();
         }
 
-        // Show modal with snack details
-        function showSnackModal(itemId, categoryId) {
-            const item = snacksData.categories[categoryId].items.find(item => item.id === itemId);
+        // Show modal with toy details
+        function showToyModal(itemId) {
+            const item = toysData.items.find(item => item.id === itemId);
             if (!item) return;
 
-            const modal = document.getElementById('snackModal');
+            const modal = document.getElementById('toyModal');
             const modalImage = document.getElementById('modalImage');
             const modalTitle = document.getElementById('modalTitle');
             const modalDescription = document.getElementById('modalDescription');
@@ -589,7 +512,7 @@
 
         // Setup modal event listeners
         function setupModalEventListeners() {
-            const modal = document.getElementById('snackModal');
+            const modal = document.getElementById('toyModal');
             const closeBtn = document.querySelector('.close');
 
             // Close modal when clicking the X button
@@ -612,78 +535,29 @@
 
         // Close modal function
         function closeModal() {
-            const modal = document.getElementById('snackModal');
+            const modal = document.getElementById('toyModal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore background scrolling
         }
 
-        // Category filtering functionality
-        function showCategory(category) {
-            const sections = document.querySelectorAll('.category-section');
-            const buttons = document.querySelectorAll('.nav-btn');
-            currentCategory = category;
-
-            // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            if (category === 'all') {
-                sections.forEach(section => {
-                    section.style.display = 'block';
-                    section.classList.add('fade-in');
-                });
-            } else {
-                sections.forEach(section => {
-                    if (section.id === category + '-section') {
-                        section.style.display = 'block';
-                        section.classList.add('fade-in');
-                    } else {
-                        section.style.display = 'none';
-                    }
-                });
-            }
-        }
-
         // Search functionality
-        function searchSnacks() {
+        function searchToys() {
             const searchTerm = document.querySelector('.search-box').value.toLowerCase();
             const cards = document.querySelectorAll('.snack-card');
-            const sections = document.querySelectorAll('.category-section');
-
-            if (searchTerm === '') {
-                // Show all sections if search is empty
-                sections.forEach(section => section.style.display = 'block');
-                cards.forEach(card => card.style.display = 'block');
-                return;
-            }
-
-            let hasVisibleCards = {};
 
             cards.forEach(card => {
-                const snackName = card.getAttribute('data-name');
-                const category = card.getAttribute('data-category');
+                const toyName = card.getAttribute('data-name');
                 
-                if (snackName.includes(searchTerm)) {
+                if (toyName.includes(searchTerm)) {
                     card.style.display = 'block';
-                    hasVisibleCards[category] = true;
                 } else {
                     card.style.display = 'none';
-                }
-            });
-
-            // Hide sections that have no visible cards
-            sections.forEach(section => {
-                const sectionCategory = section.id.replace('-section', '');
-                if (hasVisibleCards[sectionCategory]) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
                 }
             });
         }
 
         // Load data when page loads
-        document.addEventListener('DOMContentLoaded', loadSnacksData);
+        document.addEventListener('DOMContentLoaded', loadToysData);
     </script>
 </body>
 </html>
