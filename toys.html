@@ -32,6 +32,11 @@
         </div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
     <!-- Modal for displaying toy details -->
     <div id="toyModal" class="modal">
         <div class="modal-content">
@@ -195,6 +200,24 @@
 
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', loadToysData);
+
+        // Back to top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
     </script>
 </body>
 </html>
