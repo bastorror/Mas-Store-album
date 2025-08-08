@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍬 ลูกอม - ร้านมาศการค้า</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🍬 ลูกอม</h1>
+            <p class="subtitle">ร้านมาศการค้า</p>
+        </div>
+    </header>
+
+    <nav class="back-nav">
+        <div class="container">
+            <a href="index.html" class="back-btn">← กลับหน้าหลัก</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="category-title large">🍬 ลูกอม</h2>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="🔍 ค้นหาลูกอมที่คุณชื่นชอบ..." onkeyup="searchCandy()">
+        </div>
+
+        <div class="snack-grid" id="candy-grid">
+            <!-- Candy items will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- Modal for displaying candy details -->
+    <div id="candyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image" id="modalImage">
+                <!-- Image or emoji will be inserted here -->
+            </div>
+            <div class="modal-info">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-description" id="modalDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 ร้านมาส สงวนลิขสิทธิ์ | ลูกอมคุณภาพพรีเมียมสำหรับทุกคน</p>
+        </div>
+    </footer>
+
+    <script>
+        let candyData = {};
+        const categoryId = 'candy';
+
+        // Load candy data from JSON file
+        async function loadCandyData() {
+            try {
+                const response = await fetch('snacks-data.json');
+                const data = await response.json();
+                candyData = data.categories[categoryId];
+                renderCandy();
+                setupEventListeners();
+            } catch (error) {
+                console.error('Error loading candy data:', error);
+                // Fallback: show error message
+                document.getElementById('candy-grid').innerHTML = 
+                    '<p style="text-align: center; color: #666; margin: 50px 0;">ไม่สามารถโหลดข้อมูลลูกอมได้ กรุณาลองใหม่อีกครั้ง</p>';
+            }
+        }
+
+        // Render candy
+        function renderCandy() {
+            const container = document.getElementById('candy-grid');
+            let html = '';
+
+            candyData.items.forEach(item => {
+                html += createCandyCard(item);
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Create HTML for a single candy card
+        function createCandyCard(item) {
+            const hasImage = item.image && item.image.trim() !== '';
+            const imageContent = hasImage 
+                ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+                : '';
+            const fallbackEmoji = `<span class="emoji-fallback" style="display: ${hasImage ? 'none' : 'flex'}">${item.emoji}</span>`;
+            
+            return `
+                <div class="snack-card" data-name="${item.name.toLowerCase()}" data-id="${item.id}">
+                    <div class="snack-image">
+                        ${imageContent}
+                        ${fallbackEmoji}
+                    </div>
+                    <div class="snack-info">
+                        <h3 class="snack-name">${item.name}</h3>
+                        <p class="snack-description">${item.description}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Setup event listeners after content is loaded
+        function setupEventListeners() {
+            // Add click event to candy cards for modal
+            document.querySelectorAll('.snack-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    showCandyModal(itemId);
+                });
+            });
+
+            // Setup modal close functionality
+            setupModalEventListeners();
+        }
+
+        // Show modal with candy details
+        function showCandyModal(itemId) {
+            const item = candyData.items.find(item => item.id === itemId);
+            if (!item) return;
+
+            const modal = document.getElementById('candyModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+
+            // Set title and description
+            modalTitle.textContent = item.name;
+            modalDescription.textContent = item.description;
+
+            // Set image or emoji
+            const hasImage = item.image && item.image.trim() !== '';
+            if (hasImage) {
+                modalImage.innerHTML = `<img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'emoji-large\\'>${item.emoji}</div>';">`;
+            } else {
+                modalImage.innerHTML = `<div class="emoji-large">${item.emoji}</div>`;
+            }
+
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Setup modal event listeners
+        function setupModalEventListeners() {
+            const modal = document.getElementById('candyModal');
+            const closeBtn = document.querySelector('.close');
+
+            // Close modal when clicking the X button
+            closeBtn.addEventListener('click', closeModal);
+
+            // Close modal when clicking outside of it
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+        }
+
+        // Close modal function
+        function closeModal() {
+            const modal = document.getElementById('candyModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore background scrolling
+        }
+
+        // Search functionality
+        function searchCandy() {
+            const searchTerm = document.querySelector('.search-box').value.toLowerCase();
+            const cards = document.querySelectorAll('.snack-card');
+
+            cards.forEach(card => {
+                const candyName = card.getAttribute('data-name');
+                
+                if (candyName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadCandyData);
+
+        // Back to top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
